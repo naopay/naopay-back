@@ -2,13 +2,14 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsBase64, IsBoolean, IsMongoId, IsNotEmpty, IsNumber, IsString, ValidateNested } from "class-validator";
 
-class OptionalChoice {
+export class OptionalChoiceDto {
   @IsString()
+  @IsNotEmpty()
   name: string;
 
   @IsNumber()
+  @IsNotEmpty()
   price: number;
-  
 }
 
 export class CreateProductDto {
@@ -59,18 +60,18 @@ export class CreateProductDto {
 
   @ApiProperty({
     description: 'Array of the extra [{name:big, price: 0.5}, ...]',
-    type: [OptionalChoice]
+    type: [OptionalChoiceDto]
     })
   @ValidateNested({each: true})
-  @Type(() => OptionalChoice)
-  readonly extra: OptionalChoice[];
+  @Type(() => OptionalChoiceDto)
+  extra: OptionalChoiceDto[];
 
   @ApiProperty({
     description: 'Array of the options [{name:ketchup, price: 0.5}, ...] (only one can be chosen)',
-    type: [OptionalChoice]
+    type: [OptionalChoiceDto]
   })
   @ValidateNested({each: true})
-  @Type(() => OptionalChoice)
-  readonly options: OptionalChoice[][];
+  @Type(() => OptionalChoiceDto)
+  options: OptionalChoiceDto[][];
 
 }

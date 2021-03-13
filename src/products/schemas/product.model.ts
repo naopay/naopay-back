@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import { v4 as uuid } from 'uuid'
 import { Category } from 'src/categories/schemas/category.model';
 
-@Schema({_id: true})
+@Schema()
 export class OptionalChoice extends Document {
     @Prop({
         required: true
@@ -16,6 +16,11 @@ export class OptionalChoice extends Document {
         required:true
     })
     price: number;
+
+    @Prop({
+        default: false
+    })
+    deleted: boolean;
 }
 
 @Schema()
@@ -51,10 +56,10 @@ export class Product extends Document {
     })
     category : Category
 
-    @Prop({type: OptionalChoice})
-    extra: [OptionalChoice]
+    @Prop({type: OptionalChoice, ref: () => OptionalChoice})
+    extra: OptionalChoice[]
     
-    @Prop({type: OptionalChoice})
+    @Prop({type: OptionalChoice, ref: () => OptionalChoice})
     options: OptionalChoice[][]
 
     @Prop({default: Date.now})
@@ -68,7 +73,7 @@ export const ProductSchema = SchemaFactory.createForClass(Product)
 ProductSchema.pre('save', async function (next) {
     // TODO - Retirer return
     return next();
-
+    /*
     try {
         if (!this.isModified('image')) {
             return next();
@@ -81,5 +86,5 @@ ProductSchema.pre('save', async function (next) {
         return next();
     } catch (err) {
         return next(err);
-    }
+    }*/
 })
