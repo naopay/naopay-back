@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document, Mongoose, Schema as SchemaM } from 'mongoose'
-import { Product } from 'src/products/schemas/product.model';
+import { Product, OptionalChoice } from 'src/products/schemas/product.model';
 
 export class AmoutHandler extends Document {
     @Prop({
@@ -15,22 +15,30 @@ export class AmoutHandler extends Document {
 }
 
 export class ProductOrder extends Document {
+
+    @Prop({required:true})
     @Prop({
-        required: true,
-        type: Product
+        type: Product,
+        ref: () => Product,
     })
     product: Product;
 
     @Prop({
+        type: OptionalChoice,
+        ref: () => OptionalChoice
+    })
+    extra: OptionalChoice[]
+
+    @Prop({
+        type: OptionalChoice,
+        ref: () => OptionalChoice
+    })
+    options: OptionalChoice[]
+    
+    @Prop({
         required: true
     })
     quantity: number
-
-    @Prop({
-        required: true,
-        type: AmoutHandler
-    })
-    price: AmoutHandler
 }
 
 @Schema()
@@ -41,6 +49,12 @@ export class Transaction extends Document {
         type: AmoutHandler
     })
     total: AmoutHandler
+
+    @Prop({
+        required:true,
+        type: ProductOrder
+    })
+    products: ProductOrder[]
 
     @Prop({
         required:true

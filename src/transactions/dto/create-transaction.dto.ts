@@ -1,8 +1,19 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsArray, IsMongoId, IsNotEmpty, IsNumber, ValidateNested } from "class-validator";
+import { IsArray, IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from "class-validator";
 
-export class ProductOrder {
+
+export class AmoutHandlerDto {
+  @IsNumber()
+  @IsNotEmpty()
+  fiat: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  nano: number;
+}
+
+export class ProductOrderDto {
   @ApiProperty({
       description: 'MongoDB ID of the product',
       format: 'string'
@@ -22,12 +33,14 @@ export class ProductOrder {
   @ApiProperty({
     description: 'List ID of extra price'
   })
+  @IsOptional()
   @IsArray()
   readonly extra: string[]
   
   @ApiProperty({
-    description: 'List ID of extra price for the sum'
+    description: 'List ID of options price for the sum'
   })
+  @IsOptional()
   @IsArray()
   readonly options: string[]
 }
@@ -35,9 +48,42 @@ export class ProductOrder {
 export class CreateTransactionDto {
   @ApiProperty({
     description: 'Array of the product order',
-    type: [ProductOrder]
+    type: [ProductOrderDto]
     })
   @ValidateNested({each: true})
-  @Type(() => ProductOrder)
-  readonly products: ProductOrder[];
+  @Type(() => ProductOrderDto)
+  readonly products: ProductOrderDto[];
+
+  @ApiProperty({
+    description: 'Public address of the sender',
+    format: 'string'
+    })
+  @IsNotEmpty()
+  @IsString()
+  readonly sender: string
+
+  @ApiProperty({
+    description: 'Public address of the receiver',
+    format: 'string'
+    })
+    @IsNotEmpty()
+  @IsString()
+  readonly receiver: string
+
+  @ApiProperty({
+    description: 'txid of the transaction',
+    format: 'string'
+    })
+  @IsString()
+  @IsNotEmpty()
+  readonly txid: string
+
+  @ApiProperty({
+    description: 'total in nano and fiat',
+    type: AmoutHandlerDto
+  })
+  @IsNotEmpty()
+  @ValidateNested()
+  @Type(() => AmoutHandlerDto)
+  total: AmoutHandlerDto
 }
