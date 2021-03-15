@@ -13,28 +13,32 @@ export class ProductsService {
     @InjectModel('OptionalChoice') private optchoiceModel: Model<OptionalChoice>){}
   async create(createProductDto: CreateProductDto) {
     const product = new this.productModel(createProductDto)
-    product.extra = await Promise.all(createProductDto.extra!.map(async (value) => {
+    product.extras = await Promise.all(createProductDto.extras!.map(async (value) => {
       const extra = new this.optchoiceModel(value)
       
       return (await extra.save())._id;
     }));
 
-    product.options = await Promise.all(createProductDto.options!.map((value) => {
-      return Promise.all(value.map(async (opt) => {
-        const option = new this.optchoiceModel(opt)
-        return (await option.save())._id;
-      }));
-    }));
+    /*
+    product.options = await Promise.all(createProductDto.options!.map(async (value) => {
+      return {
+        name: value.name,
+        choices: <OptionalChoice[]>await Promise.all(value.options.map(async (opt) => {
+          const option = new this.optchoiceModel(opt)
+          return (await option.save())._id;
+        }))
+      }
+    }));*/
 
     return product.save();
   }
 
   findByCategory(category: Category) {
-    return this.productModel.find({category: category.id, deleted: false}).populate('extra').populate('options');
+    return this.productModel.find({category: category.id, deleted: false}).populate('extras').populate('options');
   }
 
   findAll() {
-    return this.productModel.find({deleted: false}).populate('extra').populate('options');
+    return this.productModel.find({deleted: false}).populate('options.choices').populate('extras');
   }
 
   findOne(id: number) {

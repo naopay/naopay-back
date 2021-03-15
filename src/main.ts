@@ -12,7 +12,6 @@ async function bootstrap() {
   if (!fs.existsSync(imagesDir)){
     fs.mkdirSync(imagesDir);
   }
-
   const app = await NestFactory.create(AppModule);
   app.enableCors();
 

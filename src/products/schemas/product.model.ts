@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Types } from 'mongoose'
-import { Document } from 'mongoose'
+import { Document, Schema as SchemaM } from 'mongoose'
 import * as fs from 'fs';
 import { v4 as uuid } from 'uuid'
 import { Category } from 'src/categories/schemas/category.model';
@@ -21,6 +21,18 @@ export class OptionalChoice extends Document {
         default: false
     })
     deleted: boolean;
+}
+
+@Schema()
+export class Option extends Document {
+    @Prop({
+        required: true
+    })
+    name: string;
+
+    @Prop({ type: [{ type: SchemaM.Types.ObjectId, ref: 'OptionalChoice' }] })
+    choices: OptionalChoice[]
+
 }
 
 @Schema()
@@ -56,11 +68,11 @@ export class Product extends Document {
     })
     category : Category
 
-    @Prop({type: OptionalChoice, ref: () => OptionalChoice})
-    extra: OptionalChoice[]
+    @Prop({ type: [{ type: SchemaM.Types.ObjectId, ref: 'OptionalChoice' }] })
+    extras: OptionalChoice[]
     
-    @Prop({type: OptionalChoice, ref: () => OptionalChoice})
-    options: OptionalChoice[][]
+    @Prop()
+    options: Option[]
 
     @Prop({default: Date.now})
     created: Date

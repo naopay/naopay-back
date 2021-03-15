@@ -3,7 +3,7 @@
 /node_modules
 
 /img
-
+/secrets
 # Logs
 logs
 *.log
