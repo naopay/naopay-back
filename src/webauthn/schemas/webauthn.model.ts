@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import {Document} from 'mongoose'
+import { Document } from 'mongoose'
+
 
 @Schema()
 export class WebAuthn extends Document {
@@ -9,6 +10,12 @@ export class WebAuthn extends Document {
         index: true
     })
     username: string
+
+    @Prop()
+    challenge: string
+
+    @Prop()
+    cipher: string
 
     @Prop({
         required: true
@@ -20,8 +27,11 @@ export class WebAuthn extends Document {
     })
     registred: boolean
 
-    @Prop({default: Date.now})
+    @Prop({ default: Date.now })
     created: Date
+
+    @Prop()
+    authenticators: any[]
 
 }
 
