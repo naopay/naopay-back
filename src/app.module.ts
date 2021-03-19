@@ -6,6 +6,7 @@ import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { WebauthnModule } from './webauthn/webauthn.module';
+import { TerminalGateway } from './terminal/terminal.gateway';
 
 @Module({
   imports: [
@@ -13,8 +14,14 @@ import { WebauthnModule } from './webauthn/webauthn.module';
     ProductsModule,
     CategoriesModule,
     TransactionsModule,
-    WebauthnModule],
-  controllers: [AppController],
-  providers: [AppService],
+    WebauthnModule
+  ],
+  controllers: [
+    AppController
+  ],
+  providers: [
+    AppService,
+    TerminalGateway
+  ],
 })
 export class AppModule {}
