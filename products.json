@@ -1,0 +1,161 @@
+[{
+  "_id": {
+    "$oid": "6052272a271ccd32d0ac719d"
+  },
+  "options": [],
+  "extras": [
+    {
+      "$oid": "6052272a271ccd32d0ac719e"
+    },
+    {
+      "$oid": "6052272a271ccd32d0ac719f"
+    }
+  ],
+  "deleted": false,
+  "image": "string",
+  "name": "Coffee",
+  "price": 2.5,
+  "available": true,
+  "category": "60522678271ccd32d0ac719c",
+  "created": {
+    "$date": "2021-03-17T15:58:34.137Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60522745271ccd32d0ac71a0"
+  },
+  "options": [],
+  "extras": [],
+  "deleted": false,
+  "image": "string",
+  "name": "Matcha Latte",
+  "price": 4,
+  "available": true,
+  "category": "60522678271ccd32d0ac719c",
+  "created": {
+    "$date": "2021-03-17T15:59:01.530Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605577f626f9d9536cd3ba4d"
+  },
+  "options": [],
+  "extras": [
+    {
+      "$oid": "605577f626f9d9536cd3ba4e"
+    },
+    {
+      "$oid": "605577f626f9d9536cd3ba4f"
+    },
+    {
+      "$oid": "605577f626f9d9536cd3ba50"
+    }
+  ],
+  "deleted": false,
+  "image": "string",
+  "name": "Regina",
+  "price": 10,
+  "available": true,
+  "category": "6052266a271ccd32d0ac719a",
+  "created": {
+    "$date": "2021-03-20T04:20:06.932Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605577f726f9d9536cd3ba51"
+  },
+  "options": [],
+  "extras": [
+    {
+      "$oid": "605577f726f9d9536cd3ba52"
+    },
+    {
+      "$oid": "605577f726f9d9536cd3ba53"
+    },
+    {
+      "$oid": "605577f726f9d9536cd3ba54"
+    }
+  ],
+  "deleted": false,
+  "image": "string",
+  "name": "Goat's cheese",
+  "price": 10,
+  "available": true,
+  "category": "6052266a271ccd32d0ac719a",
+  "created": {
+    "$date": "2021-03-20T04:20:07.852Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6055783626f9d9536cd3ba55"
+  },
+  "options": [],
+  "extras": [
+    {
+      "$oid": "6055783626f9d9536cd3ba56"
+    },
+    {
+      "$oid": "6055783626f9d9536cd3ba57"
+    }
+  ],
+  "deleted": false,
+  "image": "string",
+  "name": "Four-cheese",
+  "price": 10,
+  "available": true,
+  "category": "6052266a271ccd32d0ac719a",
+  "created": {
+    "$date": "2021-03-20T04:21:10.876Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6055788626f9d9536cd3ba58"
+  },
+  "options": [],
+  "extras": [
+    {
+      "$oid": "6055788626f9d9536cd3ba59"
+    },
+    {
+      "$oid": "6055788626f9d9536cd3ba5a"
+    }
+  ],
+  "deleted": false,
+  "image": "string",
+  "name": "Margarita",
+  "price": 10,
+  "available": true,
+  "category": "6052266a271ccd32d0ac719a",
+  "created": {
+    "$date": "2021-03-20T04:22:30.910Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605578a426f9d9536cd3ba5b"
+  },
+  "options": [],
+  "extras": [
+    {
+      "$oid": "605578a426f9d9536cd3ba5c"
+    },
+    {
+      "$oid": "605578a426f9d9536cd3ba5d"
+    }
+  ],
+  "deleted": false,
+  "image": "string",
+  "name": "Hawaiian",
+  "price": 10,
+  "available": true,
+  "category": "6052266a271ccd32d0ac719a",
+  "created": {
+    "$date": "2021-03-20T04:23:00.862Z"
+  },
+  "__v": 0
+}]

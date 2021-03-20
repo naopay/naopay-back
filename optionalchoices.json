@@ -1,0 +1,113 @@
+[{
+  "_id": {
+    "$oid": "6052272a271ccd32d0ac719e"
+  },
+  "deleted": false,
+  "name": "Croissant",
+  "price": 2.5,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6052272a271ccd32d0ac719f"
+  },
+  "deleted": false,
+  "name": "Pain au chocolat",
+  "price": 3,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605577f626f9d9536cd3ba4e"
+  },
+  "deleted": false,
+  "name": "Chorizo",
+  "price": 2,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605577f626f9d9536cd3ba4f"
+  },
+  "deleted": false,
+  "name": "Pepperoni",
+  "price": 2.5,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605577f626f9d9536cd3ba50"
+  },
+  "deleted": false,
+  "name": "Mozarella",
+  "price": 1.5,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605577f726f9d9536cd3ba52"
+  },
+  "deleted": false,
+  "name": "Chorizo",
+  "price": 2,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605577f726f9d9536cd3ba53"
+  },
+  "deleted": false,
+  "name": "Pepperoni",
+  "price": 2.5,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605577f726f9d9536cd3ba54"
+  },
+  "deleted": false,
+  "name": "Mozarella",
+  "price": 1.5,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6055783626f9d9536cd3ba56"
+  },
+  "deleted": false,
+  "name": "Chorizo",
+  "price": 2,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6055783626f9d9536cd3ba57"
+  },
+  "deleted": false,
+  "name": "Pepperoni",
+  "price": 2.5,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6055788626f9d9536cd3ba59"
+  },
+  "deleted": false,
+  "name": "Chorizo",
+  "price": 2,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6055788626f9d9536cd3ba5a"
+  },
+  "deleted": false,
+  "name": "Pepperoni",
+  "price": 2.5,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605578a426f9d9536cd3ba5c"
+  },
+  "deleted": false,
+  "name": "Chorizo",
+  "price": 2,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605578a426f9d9536cd3ba5d"
+  },
+  "deleted": false,
+  "name": "Pepperoni",
+  "price": 2.5,
+  "__v": 0
+}]
