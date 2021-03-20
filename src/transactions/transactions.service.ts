@@ -21,8 +21,7 @@ export class TransactionsService {
     return this.transactionModel
     .find()
     .populate({path:'products.product', select:'name category price', model: Product})
-    .populate({path: 'products.extra', select: 'name price', model: OptionalChoice})
-    .populate({path: 'products.options', select: 'name price', model: OptionalChoice});
+    .populate({path: 'products.extras', select: 'name price', model: OptionalChoice});
   }
 
   findOne(id: number) {
