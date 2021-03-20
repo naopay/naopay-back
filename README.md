@@ -3,7 +3,9 @@
 </p>
 
 # nanopos-back
-
+- WebAuthn : only Windows Hello for now (fingerprints for the future)
+- MongoDB
+- NestJS
 ## Installation
 
 ```bash
