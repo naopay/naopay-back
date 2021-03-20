@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsArray, IsBase64, IsBoolean, IsMongoId, IsNotEmpty, IsNumber, IsString, ValidateNested } from "class-validator";
+import { IsArray, IsBase64, IsBoolean, IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from "class-validator";
 
 export class OptionalChoiceDto {
   @IsString()
@@ -73,16 +73,9 @@ export class CreateProductDto {
     description: 'Array of the extra [{name:big, price: 0.5}, ...]',
     type: [OptionalChoiceDto]
     })
+  @IsOptional()
   @ValidateNested({each: true})
   @Type(() => OptionalChoiceDto)
   extras: OptionalChoiceDto[];
-
-  @ApiProperty({
-    description: 'Array of the options [{name:ketchup, price: 0.5}, ...] (only one can be chosen)',
-    type: OptionDto
-  })
-  @ValidateNested({each: true})
-  @Type(() => OptionDto)
-  options: OptionDto[];
 
 }

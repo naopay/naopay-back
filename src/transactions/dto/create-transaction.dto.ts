@@ -4,11 +4,11 @@ import { IsArray, IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString, Validat
 
 
 export class AmoutHandlerDto {
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
   fiat: number;
 
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
   nano: number;
 }
@@ -35,14 +35,7 @@ export class ProductOrderDto {
   })
   @IsOptional()
   @IsArray()
-  readonly extra: string[]
-  
-  @ApiProperty({
-    description: 'List ID of options price for the sum'
-  })
-  @IsOptional()
-  @IsArray()
-  readonly options: string[]
+  readonly extras: string[]
 }
 
 export class CreateTransactionDto {

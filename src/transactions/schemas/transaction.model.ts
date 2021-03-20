@@ -6,12 +6,12 @@ export class AmoutHandler extends Document {
     @Prop({
         required:true
     })
-    fiat: number;
+    fiat: string;
 
     @Prop({
         required:true
     })
-    nano: number;
+    nano: string;
 }
 
 export class ProductOrder extends Document {
@@ -27,13 +27,7 @@ export class ProductOrder extends Document {
         type: OptionalChoice,
         ref: () => OptionalChoice
     })
-    extra: OptionalChoice[]
-
-    @Prop({
-        type: OptionalChoice,
-        ref: () => OptionalChoice
-    })
-    options: OptionalChoice[]
+    extras: OptionalChoice[]
     
     @Prop({
         required: true
