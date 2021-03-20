@@ -11,7 +11,7 @@
 ```bash
 $ npm install
 ```
-
+You can either use the swagger ('/api') and post on category and product or import in mongodb the json data (mock directory) to use the nanopos-front.
 ## Running the app
 
 ```bash
