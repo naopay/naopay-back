@@ -29,3 +29,7 @@ $ npm run start:prod
 
 - Nicolas Jorif
 - Fayçal Bouarkat
+
+## Give us a beer 🍺
+
+nano_1fayco7j136167bry6ow8xoczchsxyqzfkcyo5u4js3bt7tp47ieg1boei69
