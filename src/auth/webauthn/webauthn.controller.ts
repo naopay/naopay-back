@@ -3,7 +3,7 @@ import { RegisterDto, LoginDto } from './dto/webauthn.dto';
 import { WebAuthnResponseDto } from './dto/response.dto';
 import { WebauthnService } from './webauthn.service';
 
-@Controller('webauthn')
+@Controller('auth/webauthn')
 export class WebauthnController {
   constructor(private readonly webauthnService: WebauthnService) {
   }

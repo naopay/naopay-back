@@ -6,6 +6,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { ProductsModule } from './products/products.module';
 import * as fs from 'fs';
 import { TransactionsModule } from './transactions/transactions.module';
+import { AuthModule } from './auth/auth.module';
 
 async function bootstrap() {
   const imagesDir = 'img'
@@ -30,7 +31,8 @@ async function bootstrap() {
       include: [
         ProductsModule,
         CategoriesModule,
-        TransactionsModule
+        TransactionsModule,
+        AuthModule
       ],
     });
     SwaggerModule.setup('api', app, document);

@@ -12,6 +12,14 @@ export class ResponseDto {
     @IsOptional()
     @IsString()
     readonly authenticatorData: string;
+    
+    @IsOptional()
+    @IsString()
+    readonly signature: string;
+
+    @IsOptional()
+    @IsString()
+    readonly userHandle: string;
 }
 
 export class WebAuthnResponseDto {
