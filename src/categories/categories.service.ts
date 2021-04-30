@@ -1,42 +1,36 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ProductsService } from 'src/products/products.service';
+import { ItemsService } from 'src/items/items.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './schemas/category.model';
 
 @Injectable()
 export class CategoriesService {
   constructor(
     @InjectModel('Category') private categoryModel: Model<Category>,
-    private productService: ProductsService
-    ) {}
+    private itemsService: ItemsService
+  ) { }
 
   create(createCategoryDto: CreateCategoryDto) {
     const category = new this.categoryModel(createCategoryDto)
     return category.save();
   }
 
-  async findProductsByCategory(id: string) {
+  async findItemsByCategory(id: string) {
     const category: Category = await this.categoryModel.findById(id);
     if (!category) throw new BadRequestException("Category not found");
-    return this.productService.findByCategory(category);
+    return this.itemsService.findByCategory(category);
   }
 
   findAll() {
-    return this.categoryModel.find();
+    return this.categoryModel.find({deleted: false});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} category`;
-  }
-
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async remove(id: string): Promise<void> {
+    const category = await this.categoryModel.findById(id);
+    if (!category) { throw new BadRequestException("Category not found"); }
+    category.deleted = true;
+    await Promise.all([category.save(), this.itemsService.removeByCategory(category)])
   }
 }

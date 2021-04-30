@@ -70,8 +70,7 @@ export class TokenService {
 
       return logout ? null : this.generateTokenPair(decodedRtoken.sub, decodedRtoken.token);
     } catch (e) {
-      // TODO Handle
-      //throw new AuthenticationError('Invalid refresh token')
+      throw new UnauthorizedException('Invalid refresh token');
     }
   }
 
@@ -80,6 +79,8 @@ export class TokenService {
       secret: this.configService.get<string>('REFRESH_JWT_SECRET'),
     });
   }
+
+  
 
   private async getUserTokens(sub: string): Promise<Token> {
     const userTokens = await this.tokenModel.findOne({ username: sub }).exec();

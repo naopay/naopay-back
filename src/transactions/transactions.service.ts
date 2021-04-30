@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { OptionalChoice, Product } from 'src/products/schemas/product.model';
+import { ExtraChoice, Item } from 'src/items/schemas/item.model';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
-import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { Transaction } from './schemas/transaction.model';
 
 @Injectable()
@@ -20,19 +19,11 @@ export class TransactionsService {
   findAll() {
     return this.transactionModel
     .find()
-    .populate({path:'products.product', select:'name category price', model: Product})
-    .populate({path: 'products.extras', select: 'name price', model: OptionalChoice});
+    .populate({path:'items.item', select:'name category price', model: Item})
+    .populate({path: 'items.extras', select: 'name price', model: ExtraChoice});
   }
 
   findOne(id: number) {
     return this.transactionModel.findById(id);
-  }
-
-  update(id: number, updateTransactionDto: UpdateTransactionDto) {
-    return `This action updates a #${id} transaction`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} transaction`;
   }
 }

@@ -1,6 +1,5 @@
 import { Logger } from '@nestjs/common';
 import {
-  OnGatewayDisconnect,
   SubscribeMessage,
   WebSocketGateway,
 } from '@nestjs/websockets';

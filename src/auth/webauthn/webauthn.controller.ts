@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { RegisterDto, LoginDto } from './dto/webauthn.dto';
 import { WebAuthnResponseDto } from './dto/response.dto';
 import { WebauthnService } from './webauthn.service';

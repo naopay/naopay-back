@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import base64url from 'base64url';
 import * as crypto from 'crypto';
@@ -9,11 +9,8 @@ import { Authenticator, WebAuthn } from './schemas/webauthn.model';
 import { generateAssertionOptions, generateAttestationOptions, verifyAssertionResponse, verifyAttestationResponse } from '@simplewebauthn/server';
 import { TokenService } from '../token/token.service';
 
-// Human-readable title for your website
-const rpName = 'NaoPay';
-// A unique identifier for your website
+const rpName = 'Naopay';
 const rpID = 'localhost';
-// The URL at which attestations and assertions should occur
 const origin = `http://${rpID}:8081`;
 
 @Injectable()
@@ -35,8 +32,6 @@ export class WebauthnService {
             rpID,
             userID: user.id,
             userName: user.username,
-            // Don't prompt users for additional information about the authenticator
-            // (Recommended for smoother UX)
             attestationType: 'indirect',
         });
         user.challenge = options.challenge;
@@ -50,11 +45,9 @@ export class WebauthnService {
         if (!user) throw new UnauthorizedException("User must be already registered")
 
         const options = generateAssertionOptions({
-            // Require users to use a previously-registered authenticator
             allowCredentials: user.authenticators.map(authenticator => ({
                 id: base64url.toBuffer(authenticator.credentialID),
                 type: 'public-key',
-                // Optional
                 transports: authenticator.transports,
             })),
             userVerification: 'preferred',
@@ -67,12 +60,9 @@ export class WebauthnService {
     async response(responseDto: WebAuthnResponseDto): Promise<SuccessLoginDto> {
         const user = await this.webAuthnModel.findOne({ username: responseDto.username })
         if (!user) throw new UnauthorizedException("User does not exists")
-        const clientData = JSON.parse(base64url.decode(responseDto.response.clientDataJSON))
-        // TODO : Store challenge to reddis
 
         let verification;
         if (responseDto.response.attestationObject) {
-            // Register
             try {
                 verification = await verifyAttestationResponse({
                     credential: {
@@ -106,7 +96,6 @@ export class WebauthnService {
             user.challenge = "";
             await user.save();
         } else if (responseDto.response.authenticatorData) {
-            // Log In
             try {
                 const credID = responseDto.id;
                 const authr = user.authenticators.find(value => credID === value.credentialID)

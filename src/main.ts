@@ -3,22 +3,15 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { CategoriesModule } from './categories/categories.module';
-import { ProductsModule } from './products/products.module';
-import * as fs from 'fs';
+import { ItemsModule } from './items/items.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { AuthModule } from './auth/auth.module';
 
 async function bootstrap() {
-  const imagesDir = 'img'
-  if (!fs.existsSync(imagesDir)){
-    fs.mkdirSync(imagesDir);
-  }
   const app = await NestFactory.create(AppModule);
   app.enableCors();
 
-  app.useGlobalPipes(new ValidationPipe({
-    // disableErrorMessages: true,
-  }));
+  app.useGlobalPipes(new ValidationPipe());
 
   const options = new DocumentBuilder()
     .addBearerAuth()
@@ -27,15 +20,15 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('API')
     .build();
-    const document = SwaggerModule.createDocument(app, options, {
-      include: [
-        ProductsModule,
-        CategoriesModule,
-        TransactionsModule,
-        AuthModule
-      ],
-    });
-    SwaggerModule.setup('api', app, document);
+  const document = SwaggerModule.createDocument(app, options, {
+    include: [
+      ItemsModule,
+      CategoriesModule,
+      TransactionsModule,
+      AuthModule
+    ],
+  });
+  SwaggerModule.setup('api', app, document);
   await app.listen(3000);
 }
 bootstrap();

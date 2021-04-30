@@ -13,17 +13,17 @@ export class AmoutHandlerDto {
   nano: number;
 }
 
-export class ProductOrderDto {
+export class ItemOrderDto {
   @ApiProperty({
-      description: 'MongoDB ID of the product',
+      description: 'MongoDB ID of the item',
       format: 'string'
   })
   @IsMongoId()
   @IsNotEmpty()
-  readonly product: string;
+  readonly item: string;
 
   @ApiProperty({
-    description: 'Quantity of the product',
+    description: 'Quantity of the item',
     format: 'number'
   })
   @IsNumber()
@@ -40,12 +40,12 @@ export class ProductOrderDto {
 
 export class CreateTransactionDto {
   @ApiProperty({
-    description: 'Array of the product order',
-    type: [ProductOrderDto]
+    description: 'Array of the item order',
+    type: [ItemOrderDto]
     })
   @ValidateNested({each: true})
-  @Type(() => ProductOrderDto)
-  readonly products: ProductOrderDto[];
+  @Type(() => ItemOrderDto)
+  readonly items: ItemOrderDto[];
 
   @ApiProperty({
     description: 'Public address of the sender',

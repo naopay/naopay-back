@@ -14,6 +14,11 @@ export class Category extends Document {
     })
     color: number
 
+    @Prop({
+        default: false
+    })
+    deleted: boolean
+    
     @Prop({default: Date.now})
     created: Date
 

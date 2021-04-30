@@ -1,15 +1,14 @@
 
-import { Injectable, ExecutionContext, ForbiddenException, UnauthorizedException } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 @Injectable()
 export class RegisteredGuard extends AuthGuard('jwt') {
-  constructor(private readonly reflector: Reflector) {
+  constructor() {
     super();
   }
 
-  handleRequest(err, user, info: Error, context: ExecutionContext) {
+  handleRequest(err, user) {
     if (err || !user) {
       throw err || new UnauthorizedException("Forbiden by registered guard");
     }

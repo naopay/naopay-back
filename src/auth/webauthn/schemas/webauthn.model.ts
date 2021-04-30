@@ -5,7 +5,6 @@ export type Authenticator = {
     credentialID: string;
     credentialPublicKey: string;
     counter: number;
-    // ['usb' | 'ble' | 'nfc' | 'internal'] not supported yet by browser
     transports?: AuthenticatorTransport[];
 };
 
