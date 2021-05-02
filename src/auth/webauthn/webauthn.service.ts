@@ -8,17 +8,23 @@ import { WebAuthnResponseDto } from './dto/response.dto';
 import { Authenticator, WebAuthn } from './schemas/webauthn.model';
 import { generateAssertionOptions, generateAttestationOptions, verifyAssertionResponse, verifyAttestationResponse } from '@simplewebauthn/server';
 import { TokenService } from '../token/token.service';
-
-const rpName = 'Naopay';
-const rpID = 'localhost';
-const origin = `http://${rpID}:8081`;
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class WebauthnService {
+
+    private readonly rpName = 'Naopay';
+    private readonly rpId: string;
+    private readonly origin: string;
+
     constructor(
         @InjectModel('WebAuthn') private webAuthnModel: Model<WebAuthn>,
-        private tokenService: TokenService
-    ) {}
+        private tokenService: TokenService,
+        configService: ConfigService
+    ) {
+        this.origin = configService.get<string>('CASHIER_APP_URL');
+        this.rpId = new URL(this.origin).hostname;
+    }
 
     async create(createTransactionDto: RegisterDto) {
         createTransactionDto.id = base64url(crypto.randomBytes(32))
@@ -28,8 +34,8 @@ export class WebauthnService {
         }
         user = new this.webAuthnModel(createTransactionDto)
         const options = generateAttestationOptions({
-            rpName,
-            rpID,
+            rpName: this.rpName,
+            rpID: this.rpId,
             userID: user.id,
             userName: user.username,
             attestationType: 'indirect',
@@ -73,8 +79,8 @@ export class WebauthnService {
                         clientExtensionResults: {}
                     },
                     expectedChallenge: user.challenge,
-                    expectedOrigin: origin,
-                    expectedRPID: rpID
+                    expectedOrigin: this.origin,
+                    expectedRPID: this.rpId
                 })
             } catch (error) {
                 console.error(error);
@@ -113,8 +119,8 @@ export class WebauthnService {
                         clientExtensionResults: {}
                     },
                     expectedChallenge: user.challenge,
-                    expectedOrigin: origin,
-                    expectedRPID: rpID,
+                    expectedOrigin: this.origin,
+                    expectedRPID: this.rpId,
                     authenticator: {
                         counter: authr.counter,
                         credentialID: base64url.toBuffer(authr.credentialID),

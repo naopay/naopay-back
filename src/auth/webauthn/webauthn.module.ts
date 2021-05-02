@@ -4,6 +4,7 @@ import { WebauthnController } from './webauthn.controller';
 import { WebAuthnSchema } from './schemas/webauthn.model';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TokenModule } from '../token/token.module';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -11,7 +12,10 @@ import { TokenModule } from '../token/token.module';
     TokenModule
   ],
   controllers: [WebauthnController],
-  providers: [WebauthnService],
+  providers: [
+    WebauthnService,
+    ConfigService
+  ],
   exports: [
     WebauthnService
   ]
