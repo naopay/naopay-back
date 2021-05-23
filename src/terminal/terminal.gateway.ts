@@ -53,11 +53,11 @@ export class TerminalGateway {
     return 'error';
   }
   
-  @SubscribeMessage('transaction')
+  @SubscribeMessage('payment')
   transaction(client: Socket, data: any): string {
     if (client.id === this.cashierSocket.id && this.terminalSocket.connected) {
-      this.terminalSocket.emit('transaction', data);
-      this.logger.debug(`Sent transaction update to terminal : ${JSON.stringify(data)}`)
+      this.terminalSocket.emit('payment', data);
+      this.logger.debug(`Sent payment update to terminal : ${JSON.stringify(data)}`)
       return 'ack';
     }
 
