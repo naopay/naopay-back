@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document, Schema as SchemaM } from 'mongoose'
-import { Item, ExtraChoice } from 'src/items/schemas/item.model';
+import { Item, Extra } from 'src/items/schemas/item.model';
 
 export class AmoutHandler extends Document {
     @Prop({
@@ -24,10 +24,10 @@ export class ItemOrder extends Document {
     item: Item;
 
     @Prop({
-        type: ExtraChoice,
-        ref: () => ExtraChoice
+        type: Extra,
+        ref: () => Extra
     })
-    extras: ExtraChoice[]
+    extras: Extra[]
     
     @Prop({
         required: true

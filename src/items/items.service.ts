@@ -2,19 +2,19 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateItemDto } from './dto/create-item.dto';
-import { ExtraChoice, Item } from './schemas/item.model';
+import { Extra, Item } from './schemas/item.model';
 import { Category } from 'src/categories/schemas/category.model';
 
 @Injectable()
 export class ItemsService {
   constructor(
     @InjectModel('Item') private itemModel: Model<Item>,
-    @InjectModel('ExtraChoice') private extraChoiceModel: Model<ExtraChoice>) { }
+    @InjectModel('Extra') private extraModel: Model<Extra>) { }
   async create(createItemDto: CreateItemDto) {
     const item = new this.itemModel(createItemDto)
     if (createItemDto.extras) {
       item.extras = await Promise.all(createItemDto.extras?.map(async (value) => {
-        const extra = new this.extraChoiceModel(value)
+        const extra = new this.extraModel(value)
 
         return (await extra.save())._id;
       }));
@@ -53,7 +53,7 @@ export class ItemsService {
     const itemExtra = item.extras.find(extra => extra.id === extraID);
     if (!itemExtra) throw new BadRequestException("Extra does not exist in this item");
 
-    const extra = await this.extraChoiceModel.findById(itemExtra.id);
+    const extra = await this.extraModel.findById(itemExtra.id);
     if (!extra) throw new BadRequestException("Extra not found");
 
     extra.deleted = true;

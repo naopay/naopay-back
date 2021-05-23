@@ -5,10 +5,18 @@ import { CategoriesModule } from './categories/categories.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { TerminalGateway } from './terminal/terminal.gateway';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/nanopos', {useCreateIndex: true}),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('MONGODB_URI'),
+        useCreateIndex: true
+      }),
+      inject: [ConfigService],
+    }),
     ItemsModule,
     CategoriesModule,
     TransactionsModule,

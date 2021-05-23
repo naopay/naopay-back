@@ -3,7 +3,7 @@ import { Document, Schema as SchemaM } from 'mongoose'
 import { Category } from 'src/categories/schemas/category.model';
 
 @Schema()
-export class ExtraChoice extends Document {
+export class Extra extends Document {
     @Prop({
         required: true
     })
@@ -49,13 +49,13 @@ export class Item extends Document {
     })
     category : Category
 
-    @Prop({ type: [{ type: SchemaM.Types.ObjectId, ref: 'ExtraChoice' }] })
-    extras: ExtraChoice[]
+    @Prop({ type: [{ type: SchemaM.Types.ObjectId, ref: 'Extra' }] })
+    extras: Extra[]
 
     @Prop({default: Date.now})
     created: Date
 
 }
 
-export const ExtraSchema = SchemaFactory.createForClass(ExtraChoice)
+export const ExtraSchema = SchemaFactory.createForClass(Extra)
 export const ItemSchema = SchemaFactory.createForClass(Item)

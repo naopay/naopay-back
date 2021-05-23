@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsBoolean, IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from "class-validator";
 
-export class ExtraChoiceDto {
+export class ExtraDto {
   @IsString()
   @IsNotEmpty()
   name: string;
@@ -51,11 +51,11 @@ export class CreateItemDto {
 
   @ApiProperty({
     description: 'Array of the extra [{name:big, price: 0.5}, ...]',
-    type: [ExtraChoiceDto]
+    type: [ExtraDto]
   })
   @IsOptional()
   @ValidateNested({ each: true })
-  @Type(() => ExtraChoiceDto)
-  extras: ExtraChoiceDto[];
+  @Type(() => ExtraDto)
+  extras: ExtraDto[];
 
 }

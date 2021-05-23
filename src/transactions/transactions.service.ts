@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ExtraChoice, Item } from 'src/items/schemas/item.model';
+import { Extra, Item } from 'src/items/schemas/item.model';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { Transaction } from './schemas/transaction.model';
 
@@ -20,7 +20,7 @@ export class TransactionsService {
     return this.transactionModel
     .find()
     .populate({path:'items.item', select:'name category price', model: Item})
-    .populate({path: 'items.extras', select: 'name price', model: ExtraChoice});
+    .populate({path: 'items.extras', select: 'name price', model: Extra});
   }
 
   findOne(id: number) {
